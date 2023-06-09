@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { AntDesign, Entypo } from "@expo/vector-icons";
+import Markdown from "react-native-markdown-display";
 
 const AnswerListItem = ({ answer }) => {
   return (
@@ -18,7 +19,7 @@ const AnswerListItem = ({ answer }) => {
         )}
       </View>
       <View style={styles.bodyContainer}>
-        <Text style={styles.body}>{answer.body_markdown}</Text>
+        <Markdown style={styles.body}>{answer.body_markdown}</Markdown>
 
         <Text style={styles.time}>
           answered {new Date(answer.creation_date * 1000).toDateString()}
