@@ -45,7 +45,8 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Link } from "expo-router";
-
+import { decode } from "html-entities";
+import Markdown from "react-native-markdown-display";
 const QuestionListItem = ({ question }) => {
   return (
     <Link href={`/${question.question_id}`}>
@@ -57,10 +58,10 @@ const QuestionListItem = ({ question }) => {
           )}
           {question.answer_count} answers • {question.view_count} views
         </Text>
-        <Text style={styles.title}>{question.title}</Text>
-        <Text style={styles.body} numberOfLines={2}>
-          {question.body_markdown}
-        </Text>
+        <Text style={styles.title}>{decode(question.title)}</Text>
+        <Markdown style={styles.body} numberOfLines={2}>
+          {decode(question.body_markdown)}
+        </Markdown>
         <View style={styles.tags}>
           {question.tags.map((tag) => (
             <Text key={tag} style={styles.tag}>

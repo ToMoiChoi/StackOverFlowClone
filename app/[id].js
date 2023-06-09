@@ -3,6 +3,9 @@ import React from "react";
 import { useSearchParams } from "expo-router";
 import questions from "../data/questions";
 import QuestionHeader from "../components/QuestionHeader";
+import { FlatList } from "react-native-gesture-handler";
+import answers from "../data/answers";
+import AnswerListItem from "../components/AnswerListItem";
 const QuestionDetails = () => {
   const { id } = useSearchParams();
   const question = questions.items.find((q) => q.question_id == id);
@@ -11,7 +14,11 @@ const QuestionDetails = () => {
   }
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
-      <QuestionHeader question={question} />;
+      <FlatList
+        data={answers.items}
+        renderItem={({ item }) => <AnswerListItem answer={item} />}
+        ListHeaderComponent={() => <QuestionHeader question={question} />}
+      />
     </View>
   );
 };
