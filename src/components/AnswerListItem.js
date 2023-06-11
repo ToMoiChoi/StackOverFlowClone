@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet } from "react-native";
-import { AntDesign, Entypo } from "@expo/vector-icons";
-import Markdown from "react-native-markdown-display";
+import { View, Text, StyleSheet } from 'react-native';
+import { AntDesign, Entypo } from '@expo/vector-icons';
+import { decode } from 'html-entities';
+import Markdown from 'react-native-markdown-display';
 
 const AnswerListItem = ({ answer }) => {
   return (
@@ -19,7 +20,7 @@ const AnswerListItem = ({ answer }) => {
         )}
       </View>
       <View style={styles.bodyContainer}>
-        <Markdown style={styles.body}>{answer.body_markdown}</Markdown>
+        <Markdown>{decode(answer.body_markdown)}</Markdown>
 
         <Text style={styles.time}>
           answered {new Date(answer.creation_date * 1000).toDateString()}
@@ -31,19 +32,20 @@ const AnswerListItem = ({ answer }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 25,
     paddingBottom: 20,
     borderBottomWidth: 0.5,
-    borderColor: "lightgray",
+    borderColor: 'lightgray',
+    padding: 10,
   },
   leftContainer: {
     paddingHorizontal: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   score: {
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: '500',
     marginVertical: 10,
   },
   bodyContainer: {
@@ -51,12 +53,12 @@ const styles = StyleSheet.create({
   },
   body: {
     lineHeight: 18,
-    color: "#232629",
+    color: '#232629',
   },
   time: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     fontSize: 12,
-    color: "#6a737c",
+    color: '#6a737c',
     marginTop: 10,
   },
 });
